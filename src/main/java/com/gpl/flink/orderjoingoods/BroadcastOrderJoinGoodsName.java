@@ -29,13 +29,17 @@ public class BroadcastOrderJoinGoodsName {
     private static final String JOB_NAME = "BroadcastOrderJoinGoodsName";
 
     public static void main(String[] args) throws Exception {
-        String topic = ParameterTool.fromArgs(args).get("topic");
-        String brokers = ParameterTool.fromArgs(args).get("brokers");
-        String group = ParameterTool.fromArgs(args).get("group");
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        final ParameterTool params = ParameterTool.fromArgs(args);
+        final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        //make parameters available in the web interface
+        env.getConfig().setGlobalJobParameters(params);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         env.setParallelism(1);
 
+        String topic = params.get("topic");
+        String brokers = params.get("brokers");
+        String group = params.get("group");
         Properties prop = new Properties();
         prop.setProperty("bootstrap.servers",brokers);
         prop.setProperty("group.id",group);
