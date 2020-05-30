@@ -7,8 +7,16 @@ import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
+import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExtractor;
+import org.apache.flink.streaming.api.functions.windowing.delta.DeltaFunction;
+import org.apache.flink.streaming.api.windowing.assigners.GlobalWindows;
+import org.apache.flink.streaming.api.windowing.evictors.TimeEvictor;
+import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.streaming.api.windowing.triggers.DeltaTrigger;
 
+import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author gongpulin
@@ -30,6 +38,30 @@ public class TopSpeedWindowing {
             System.out.println("Use --input to specify file input");
             carData = env.addSource(CarSource.create(2));
         }
+
+        int evictionSec = 10;
+        int triggerMeters = 50;
+        DataStream<Tuple4<Integer, Integer, Double, Long>> topSpeeds = carData.assignTimestampsAndWatermarks(new CarTimestamp())
+                .keyBy(0)
+                .window(GlobalWindows.create())
+                .evictor(TimeEvictor.of(Time.of(evictionSec, TimeUnit.SECONDS)))
+                .trigger(DeltaTrigger.of(triggerMeters,
+                        new DeltaFunction<Tuple4<Integer, Integer, Double, Long>>() {
+                            private static final long serialVersionUID = 1L;
+                            @Override
+                            public double getDelta(Tuple4<Integer, Integer, Double, Long> oldDataPoint, Tuple4<Integer, Integer, Double, Long> newDataPoint) {
+                                return newDataPoint.f2 - oldDataPoint.f2;
+                            }
+                        },carData.getType().createSerializer(env.getConfig())))
+                .maxBy(1);
+
+        if (params.has("output")) {
+            topSpeeds.writeAsText(params.get("output"));
+        } else {
+            topSpeeds.print();
+        }
+
+
     }
 
 
@@ -52,7 +84,53 @@ public class TopSpeedWindowing {
 
         private Random random = new Random();
 
+        private volatile boolean isRunning = true;
 
+        private CarSource(int numOfCars) {
+            speeds = new Integer[numOfCars];
+            distances = new Double[numOfCars];
+            Arrays.fill(speeds, 50);
+            Arrays.fill(distances, 50);
+        }
+
+        public static CarSource create(int cars) {
+            return new CarSource(cars);
+        }
+
+        @Override
+        public void run(SourceContext<Tuple4<Integer, Integer, Double, Long>> ctx) throws Exception {
+            while(isRunning) {
+                Thread.sleep(100);
+                for (int carId = 0; carId < speeds.length; carId++) {
+                    if (random.nextBoolean()) {
+                        speeds[carId] = Math.min(100, speeds[carId] + 5);
+                    } else {
+                        speeds[carId] = Math.max(0, speeds[carId] - 5);
+                    }
+                    distances[carId] += speeds[carId] / 3.6d;
+                    Tuple4<Integer, Integer, Double, Long> recoder = new Tuple4<>(carId, speeds[carId], distances[carId], System.currentTimeMillis());
+                    ctx.collect(recoder);
+                }
+            }
+
+        }
+
+        @Override
+        public void cancel() {
+            isRunning = false;
+        }
+
+
+    }
+
+
+    private static class CarTimestamp extends AscendingTimestampExtractor<Tuple4<Integer, Integer, Double, Long>> {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public long extractAscendingTimestamp(Tuple4<Integer, Integer, Double, Long> element) {
+            return element.f3;
+        }
     }
 
 
