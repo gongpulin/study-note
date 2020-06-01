@@ -37,15 +37,13 @@ class Solution {
         }
         Map map = new HashMap<Integer,Integer>(nums.length/2);
         for (int i = 0; i < nums.length; i++) {
-            int left = nums[i];
-
-            int right = target - left;
-            int leftIndex = (int) map.getOrDefault(right,-1);
+            int left = target - nums[i];
+            int leftIndex = (int) map.getOrDefault(left,-1);
             if (leftIndex != -1) {
                 res[0] = leftIndex;
                 res[1] = i;
             } else {
-                map.put(left,i);
+                map.put(nums[i],i);
             }
         }
         System.out.println(res[0]+":"+res[1]);
