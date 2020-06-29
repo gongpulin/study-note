@@ -35,10 +35,10 @@ class Solution {
         if (nums == null || nums.length == 0 ) {
             return res;
         }
-        Map map = new HashMap<Integer,Integer>(nums.length/2);
+        Map<Integer,Integer> map = new HashMap(nums.length/2);
         for (int i = 0; i < nums.length; i++) {
             int left = target - nums[i];
-            int leftIndex = (int) map.getOrDefault(left,-1);
+            int leftIndex = map.getOrDefault(left,-1);
             if (leftIndex != -1) {
                 res[0] = leftIndex;
                 res[1] = i;

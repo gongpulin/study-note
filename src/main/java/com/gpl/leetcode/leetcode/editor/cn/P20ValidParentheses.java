@@ -62,13 +62,13 @@ class Solution {
             return false;
         }
         char[] sList = s.toCharArray();
-        Stack stack = new Stack<Character>();
+        Stack<Character> stack = new Stack();
         for (int i = 0; i < sList.length; i++) {   //循环关注数组下标是否越界
             if (sList[i] == '(' || sList[i] == '{' || sList[i] == '[') {
                 stack.push(sList[i]);
             } else {
                 if ( !stack.isEmpty()) {
-                    char temp = (char) stack.pop();    // stack  之类的容器，从里面取数据之前必须判断集合是否为空
+                    char temp = stack.pop();    // stack  之类的容器，从里面取数据之前必须判断集合是否为空
                     if ((temp == '(' && sList[i] != ')') || (temp == '[' && sList[i] != ']') || (temp == '{' && sList[i] != '}')) {
                         res = false;
                         break;

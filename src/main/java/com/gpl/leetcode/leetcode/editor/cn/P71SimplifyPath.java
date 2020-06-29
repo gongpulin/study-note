@@ -66,7 +66,7 @@ class Solution {
             return "";
         }
         String[] arr = path.split("/");
-        Stack stack = new Stack<String>();
+        Stack<String> stack = new Stack();
         for (int i = 0; i < arr.length; i++) {
             if (!stack.isEmpty() && arr[i].equals("..")) {
                 stack.pop();
