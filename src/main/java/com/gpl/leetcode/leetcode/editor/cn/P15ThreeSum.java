@@ -29,7 +29,7 @@ public class P15ThreeSum{
     public static void main(String[] args) {
         Solution solution = new P15ThreeSum().new Solution();
         // TO TEST
-        int[] nums = {-1, 0, 1, 2, -1, -4};
+        int[] nums = {0, 1, 2,0,0,0,};
         solution.threeSum(nums);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -54,7 +54,7 @@ class Solution {
                 while (second < third && nums[second] + nums[third] > target) {
                     third--;
                 }
-                if (second == third) {
+                if (second >= third) {
                     break;
                 }
                 if (nums[first] + nums[second] + nums[third] == 0) {
