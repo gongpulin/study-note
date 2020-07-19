@@ -17,7 +17,9 @@
 package com.gpl.leetcode.leetcode.editor.cn;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 //Java：两数之和
 public class P1TwoSum{
@@ -26,7 +28,7 @@ public class P1TwoSum{
         // TO TEST
         int[] nums = {2, 7, 11, 15};
         int target = 9;
-        solution.twoSum(nums,target);
+        solution.twoSum1(nums,target);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
@@ -42,6 +44,7 @@ class Solution {
             if (leftIndex != -1) {
                 res[0] = leftIndex;
                 res[1] = i;
+                break;
             } else {
                 map.put(nums[i],i);
             }
@@ -49,6 +52,30 @@ class Solution {
         System.out.println(res[0]+":"+res[1]);
         return res;
     }
+
+
+    public int[] twoSum1(int[] nums, int target) {
+        int[] res = {-1,-1};
+        if (nums == null || nums.length == 0) {
+            return res;
+        }
+        Map<Integer,Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int leftIndex = map.getOrDefault(target-nums[i],-1);
+            if (leftIndex != -1) {
+                res[0] = leftIndex;
+                res[1] = i;
+                break;
+            }
+            map.put(nums[i],i);
+        }
+        System.out.println(res[0]+":"+res[1]);
+        return res;
+    }
+
+
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
