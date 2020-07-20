@@ -38,6 +38,7 @@ public class TopNHotItems extends KeyedProcessFunction<Tuple, ItemViewCount, Str
     @Override
     public void processElement(ItemViewCount input, Context context, Collector<String> out) throws Exception {
         itemState.add(input);
+        context.getCurrentKey();
         context.timerService().registerEventTimeTimer(input.windowEnd + 1);
 
     }
