@@ -8,6 +8,8 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.streaming.api.watermark.Watermark;
+import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,18 @@ public class SessionWindowing {
 
             }
         });
+
+
+        DataStream<Tuple3<String, Long, Integer>> aggregated = source
+                .keyBy(0)
+                .window(EventTimeSessionWindows.withGap(Time.milliseconds(3L)))
+                .sum(2);
+        if (params.has("output")) {
+            aggregated.writeAsText(params.get("output"));
+        } else {
+            System.out.println("Print result to stdout. Use --output to specify output path.");
+            aggregated.print();
+        }
 
 
     }
