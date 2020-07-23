@@ -60,7 +60,7 @@ class Solution {
         int cur = 1;
         int ans = 1;
         for (int i = 2; i < n; i++) {
-            ans = pre + cur;
+            ans = (pre + cur) % 1000000007;
             pre = cur;
             cur = ans;
         }
