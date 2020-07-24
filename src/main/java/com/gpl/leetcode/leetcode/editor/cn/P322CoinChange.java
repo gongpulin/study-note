@@ -22,6 +22,11 @@
 
 
 package com.gpl.leetcode.leetcode.editor.cn;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 //Java：零钱兑换
 public class P322CoinChange{
     public static void main(String[] args) {
@@ -34,29 +39,50 @@ class Solution {
         if (amount == 0 || coins == null || coins.length == 0) {
             return 0;
         }
+//        Map<Integer, Integer> map = new HashMap<>();
+//        return dp(coins, amount, map);
         return dp(coins, amount);
 
     }
     private int dp(int[] coins, int amount) {
-        if (amount == 0) {
-            return 0;
-        }
-        if (amount < 0) {
-            return -1;
-        }
-        int ans = Integer.MAX_VALUE;
-        for (int coin : coins) {
-            int subproblem = dp(coins,amount-coin);
-            if (subproblem == -1) {
-                continue;
+        int dpSzie = amount + 1;
+        int[] dp = new int[dpSzie];
+        Arrays.fill(dp,dpSzie);
+        dp[0] = 0;
+        for (int i = 0; i < dpSzie; i++) {
+            for (int coin : coins) {
+                if (i - coin < 0) {
+                    continue;
+                }
+                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
             }
-            ans = Math.min(ans,1 + subproblem);
         }
-        if (ans == Integer.MAX_VALUE) {
-            ans = -1;
-        }
-        return ans;
+        return dp[amount] == (amount+1) ? -1 : dp[amount];
     }
+//    private int dp1(int[] coins, int amount, Map map) {
+//        if (map.containsKey(amount)) {
+//            return (int) map.get(amount);
+//        }
+//        if (amount == 0) {
+//            return 0;
+//        }
+//        if (amount < 0) {
+//            return -1;
+//        }
+//        int ans = Integer.MAX_VALUE;
+//        for (int coin : coins) {
+//            int subproblem = dp(coins,amount-coin, map);
+//            if (subproblem == -1) {
+//                continue;
+//            }
+//            ans = Math.min(ans,1 + subproblem);
+//        }
+//        if (ans == Integer.MAX_VALUE) {
+//            ans = -1;
+//        }
+//        map.put(amount, ans);
+//        return ans;
+//    }
 
 }
 //leetcode submit region end(Prohibit modification and deletion)
