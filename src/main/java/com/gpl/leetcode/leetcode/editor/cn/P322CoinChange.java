@@ -27,6 +27,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * dp[i]  :  给定金额 i  最少需要 dp[i]个硬币凑成金额i
+ *
+ *          =      0  ,  i = 0;
+ * dp[i]    =     -1  ,  i < 0;
+ *          =     min(dp[i], dp[i-coin] + 1)  i > 0;
+ */
 //Java：零钱兑换
 public class P322CoinChange{
     public static void main(String[] args) {
