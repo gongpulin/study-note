@@ -15,6 +15,7 @@ public class Pbaiyuanmaibaiji {
     }
     public static void s2() {
         // x + y + z = 100
+        //6x + 8y + z = 200
         //3*x + 4*y + z/2 = 100
         //由该方程组消元z可得到 5x+7y=100，令y=0，x最大=20，则可用一个循环解决该问题
         for (int x = 0; x <= 20; x++) {
@@ -38,7 +39,7 @@ public class Pbaiyuanmaibaiji {
         for (x = 0; x < 34; x++) {
             for (y = 0; y <= 25; y++) {
                 z = 100 - x - y;
-                if ( (3 * x + 4 * y + z / 2) == 100) {
+                if ( (z % 2 == 0) && (3 * x + 4 * y + z / 2) == 100) {
                     System.out.println("x="+x+",y="+y+",z="+z);
                 }
             }
