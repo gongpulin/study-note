@@ -43,6 +43,27 @@ public class P剑指Offer10IFeiBoNaQiShuLieLcof{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    public int fib3(int n) {
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        int pre = 1, cur = 1;
+        for (int i = 3; i <= n; i++) {
+            int sum = (pre + cur) % 1000000007;
+            pre = cur;
+            cur = sum;
+        }
+        return cur;
+    }
+
+    public int fib(int n) {
+        int[] dp = new int[n+1];
+        dp[1] = dp[2] = 1;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
     public int fib1(int n) {
         if (n == 0) {
             return 0;
@@ -52,20 +73,7 @@ class Solution {
         }
         return fib(n-1) + fib(n-2);
     }
-    public int fib(int n) {
-        if (n == 0) {
-            return 0;
-        }
-        int pre = 1;
-        int cur = 1;
-        int ans = 1;
-        for (int i = 2; i < n; i++) {
-            ans = (pre + cur) % 1000000007;
-            pre = cur;
-            cur = ans;
-        }
-        return ans;
-    }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
