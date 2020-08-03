@@ -17,8 +17,10 @@
 
 package com.gpl.leetcode.leetcode.editor.cn;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 //Java：二叉树的中序遍历
 public class P94BinaryTreeInorderTraversal{
@@ -37,8 +39,63 @@ public class P94BinaryTreeInorderTraversal{
  * }
  */
 class Solution {
+
+
     public List<Integer> inorderTraversal(TreeNode root) {
-        return new ArrayList();
+//        ArrayDeque<TreeNode> deqP = new ArrayDeque<TreeNode>();
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            if (cur != null ) {
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                cur = stack.pop();
+                res.add(cur.val);
+                cur = cur.right;
+            }
+
+        }
+        return res;
+    }
+
+//    public List<Integer> inorderTraversal1(TreeNode root) {
+//        List<Integer> res = new ArrayList<>();
+//        if (root != null ) {
+//            traversal(root, res);
+//        }
+//        return res;
+//    }
+//    private void traversal(TreeNode node, List<Integer> res) {
+//        if (node != null) {
+//            if (node.left != null ) {
+//                traversal(node.left, res);
+//            }
+//            res.add(node.val);
+//            if (node.right != null ) {
+//                traversal(node.right, res);
+//            }
+//        }
+//    }
+
+    public List<Integer> inorderTraversal3(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if ( root == null ) {
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while( cur != null || !stack.isEmpty() ) {
+            while ( cur != null ) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            res.add(cur.val);
+            cur = cur.right;
+        }
+        return res;
     }
 }
 class TreeNode {
