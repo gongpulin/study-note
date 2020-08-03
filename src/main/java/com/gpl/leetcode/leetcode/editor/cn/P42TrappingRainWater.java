@@ -11,7 +11,7 @@
 //输出: 6 
 // Related Topics 栈 数组 双指针
 
-
+//
 package com.gpl.leetcode.leetcode.editor.cn;
 //Java：接雨水
 public class P42TrappingRainWater{
