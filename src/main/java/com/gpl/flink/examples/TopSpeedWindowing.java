@@ -38,6 +38,13 @@ public class TopSpeedWindowing {
             System.out.println("Use --input to specify file input");
             carData = env.addSource(CarSource.create(2));
         }
+        /**
+         * 他给我发个消息之后，我立马给他回消息，他不回
+         * 我咋打包啊，现在机器登陆不上去
+         * 你还有其他要备份的吗？我的代码都在/home目录下，备份/home目录和备份数据库我这边就完事了，你还要备份啥吗？
+         *我找到一个刷题神器，idea有leetcode插件，在idea中刷题美滋滋，摸鱼完全不会被看破
+         */
+
 
         int evictionSec = 10;
         int triggerMeters = 50;
@@ -54,7 +61,6 @@ public class TopSpeedWindowing {
                             }
                         },carData.getType().createSerializer(env.getConfig())))
                 .maxBy(1);
-
         if (params.has("output")) {
             topSpeeds.writeAsText(params.get("output"));
         } else {
