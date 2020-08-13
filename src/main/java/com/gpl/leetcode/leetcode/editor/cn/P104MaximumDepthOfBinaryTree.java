@@ -40,7 +40,7 @@ public class P104MaximumDepthOfBinaryTree{
  */
 class Solution {
 
-    public int maxDepth(TreeNode root) {
+    public int maxDepth1(TreeNode root) {
         if ( root == null ) {
             return 0;
         }
@@ -66,18 +66,18 @@ class Solution {
     }
 
 
-//    public int maxDepth(TreeNode root) {
-//        if ( root == null ) {
-//            return 0;
-//        }
-//        if (root.left == null && root.right == null ) {
-//            return 1;
-//        }
-//        int leftMaxDepth = maxDepth(root.left) + 1;
-//        int rightMaxDepth = maxDepth(root.right) + 1;
-//        return leftMaxDepth > rightMaxDepth ? leftMaxDepth : rightMaxDepth;
-//
-//    }
+    public int maxDepth(TreeNode root) {
+        if ( root == null ) {
+            return 0;
+        }
+        if (root.left == null && root.right == null ) {
+            return 1;
+        }
+        int leftMaxDepth = maxDepth(root.left);
+        int rightMaxDepth = maxDepth(root.right);
+        return leftMaxDepth > rightMaxDepth ? leftMaxDepth + 1 : rightMaxDepth + 1;
+
+    }
 
     public int maxDepth3(TreeNode root) {
         if ( root == null ) {
