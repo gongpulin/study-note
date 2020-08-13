@@ -41,7 +41,7 @@ public class P112PathSum{
  * }
  */
 class Solution {
-    public boolean hasPathSum1(TreeNode root, int sum) {
+    public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) {
             return false;
         }
@@ -52,7 +52,7 @@ class Solution {
     }
     //
 
-    public boolean hasPathSum(TreeNode root, int sum) {
+    public boolean hasPathSum2(TreeNode root, int sum) {
         if (root == null) {
             return false;
         }
@@ -80,6 +80,7 @@ class Solution {
         }
         return false;
     }
+//
 
 
 }
