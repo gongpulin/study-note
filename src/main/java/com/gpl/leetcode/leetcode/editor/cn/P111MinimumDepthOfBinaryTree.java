@@ -43,14 +43,14 @@ class Solution {
         if ( root.left == null && root.right == null) {
             return 1;
         }
-        int min_depth = Integer.MAX_VALUE;
+        int MIN_DEPTH = Integer.MAX_VALUE;
         if ( root.left != null ) {
-            min_depth = Math.min(min_depth, minDepth(root.left));
+            MIN_DEPTH = Math.min(MIN_DEPTH, minDepth(root.left));
         }
         if ( root.right != null ) {
-            min_depth = Math.min(min_depth, minDepth(root.right));
+            MIN_DEPTH = Math.min(MIN_DEPTH, minDepth(root.right));
         }
-        return min_depth + 1;
+        return MIN_DEPTH + 1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
