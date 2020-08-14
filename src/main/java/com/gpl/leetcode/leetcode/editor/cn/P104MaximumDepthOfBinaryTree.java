@@ -75,7 +75,7 @@ class Solution {
         }
         int leftMaxDepth = maxDepth(root.left);
         int rightMaxDepth = maxDepth(root.right);
-        return leftMaxDepth > rightMaxDepth ? leftMaxDepth + 1 : rightMaxDepth + 1;
+        return Math.max(leftMaxDepth, rightMaxDepth) + 1;
 
     }
 
