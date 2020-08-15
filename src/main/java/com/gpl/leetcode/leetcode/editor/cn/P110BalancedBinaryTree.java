@@ -38,11 +38,24 @@
 
 
 package com.gpl.leetcode.leetcode.editor.cn;
+
 //Java：平衡二叉树
 public class P110BalancedBinaryTree{
     public static void main(String[] args) {
         Solution solution = new P110BalancedBinaryTree().new Solution();
         // TO TEST
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node5 = new TreeNode(5);
+        TreeNode node6 = new TreeNode(6);
+        node1.left = node2;
+        node1.right = node3;
+        node2.left = node4;
+        node2.right = node5;
+        node3.left = node6;
+        System.out.println(solution.isBalanced(node1));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -76,7 +89,7 @@ class Solution {
 
 }
 //leetcode submit region end(Prohibit modification and deletion)
-class TreeNode {
+static class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
