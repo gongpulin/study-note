@@ -57,21 +57,25 @@ public class P129SumRootToLeafNumbers{
  * }
  */
 class Solution {
+    int ans = 0;
     public int sumNumbers(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        return help(root, 0);
+        help(root, 0);
+        return ans;
     }
-    public int help(TreeNode node, int ans) {
+    public void help(TreeNode node, int sum) {
         if (node == null) {
-            return 0;
+            return;
         }
-        ans = ans * 10 + node.val;
+        sum = sum * 10 + node.val;
         if (node.left == null && node.right == null) {
-            return ans;
+            ans = ans + sum;
         }
-        return help(node.left, ans) + help(node.right, ans);
+        help(node.left, sum);
+        help(node.right, sum);
+        return;
     }
     public int sumNumbers1(TreeNode root) {
         if (root == null) {
