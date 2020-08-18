@@ -61,33 +61,30 @@ class MinStack {
     
     public void push(int x) {
         stackData.push(x);
-        int t = (int) stackMin.peek();
-        if (t > x) {
+        if (stackMin.isEmpty()) {
             stackMin.push(x);
         } else {
-            stackMin.push(t);
+            int t = stackMin.peek();
+            if (t > x) {
+                stackMin.push(x);
+            } else {
+                stackMin.push(t);
+            }
         }
     }
     
-    public void pop() {
-        if (!stackData.isEmpty()) {
-            stackData.pop();
-            stackMin.pop();
-        }
+    public int pop() {
+        stackMin.pop();
+        return stackData.pop();
+
     }
     
     public int top() {
-        if(!stackData.isEmpty()) {
-            return stackData.peek();
-        }
-        throw new RuntimeException("stackData is empty");
+        return stackMin.peek();
     }
     
     public int getMin() {
-        if(!stackMin.isEmpty()) {
-            stackMin.peek();
-        }
-        throw new RuntimeException("stackMin is empty");
+        return stackMin.peek();
     }
 }
 
