@@ -30,11 +30,7 @@ public class P2AddTwoNumbers{
  *     ListNode(int x) { val = x; }
  * }
  */
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
-}
+
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode aHead = new ListNode(0);
@@ -60,5 +56,9 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
+}
 }
