@@ -41,26 +41,50 @@ class Solution {
             "wxyz"
     };
 
-    private List<String> ans = new ArrayList<>();
-    public List<String> letterCombinations(String digits) {
-        if (digits == null || digits.length() == 0) {
+
+        public List<String> letterCombinations(String digits) {
+            List<String> ans = new ArrayList<>();
+            if (digits == null || digits.length() == 0) {
+                return ans;
+            }
+            help(ans, new StringBuilder(), digits, 0);
             return ans;
         }
-        help(digits, 0, "");
-        return ans;
-    }
-    private void help(String digits, int index, String path) {
-        if (index == digits.length()) {
-            ans.add(path);
+        private void help(List<String> ans, StringBuilder path, String digits, int start) {
+            if (start == digits.length()) {
+                ans.add(path.toString());
+                return;
+            }
+            Character c = digits.charAt(start);
+            String letter = letterMap[c - '0'];
+            for (int i = 0; i < letter.length(); i++) {
+                path.append(letter.charAt(i));
+                help(ans, path, digits, start + 1);
+                path.deleteCharAt(path.length()-1);
+            }
             return;
         }
-        Character c = digits.charAt(index);
-        String letter = letterMap[c - '0'];
-        for (int i = 0; i < letter.length(); i++) {
-            help(digits, index + 1, path + letter.charAt(i));
-        }
-        return;
-    }
+
+
+//    public List<String> letterCombinations(String digits) {
+//        if (digits == null || digits.length() == 0) {
+//            return ans;
+//        }
+//        help(digits, 0, "");
+//        return ans;
+//    }
+//    private void help(String digits, int index, String path) {
+//        if (index == digits.length()) {
+//            ans.add(path);
+//            return;
+//        }
+//        Character c = digits.charAt(index);
+//        String letter = letterMap[c - '0'];
+//        for (int i = 0; i < letter.length(); i++) {
+//            help(digits, index + 1, path + letter.charAt(i));
+//        }
+//        return;
+//    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 class TreeNode {
