@@ -75,16 +75,34 @@ class Solution {
             return;
         }
         if (target == 0) {
-            ans.add(new ArrayList(path));
-//            System.out.println(path.toString());
-            return;
+            ans.add(new ArrayList<>(path));
         }
         for (int i = start; i < candidates.length; i++) {
             path.add(candidates[i]);
-            backtrack(ans, path, target-candidates[i], candidates, i);
+            backtrack(ans, path, target - candidates[i], candidates, i);
             path.remove(path.size()-1);
         }
     }
+
+
+
+
+
+//    private void backtrack(List<List<Integer>> ans, List<Integer> path, int target, int[] candidates, int start) {
+//        if (target < 0) {
+//            return;
+//        }
+//        if (target == 0) {
+//            ans.add(new ArrayList(path));
+////            System.out.println(path.toString());
+//            return;
+//        }
+//        for (int i = start; i < candidates.length; i++) {
+//            path.add(candidates[i]);
+//            backtrack(ans, path, target-candidates[i], candidates, i);
+//            path.remove(path.size()-1);
+//        }
+//    }
 
         /**
          *
