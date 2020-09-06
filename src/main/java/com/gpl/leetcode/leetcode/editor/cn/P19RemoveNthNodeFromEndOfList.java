@@ -26,11 +26,7 @@ public class P19RemoveNthNodeFromEndOfList{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
-class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-    }
+
 
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -70,5 +66,9 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
+}
 }
