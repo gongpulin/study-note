@@ -43,6 +43,7 @@ class Solution {
     }
     private void backtrack(List<List<Integer>> ans, List<Integer> path, int[] nums, int start, boolean[] used) {
         ans.add(new ArrayList(path));
+//        System.out.println(path.toString());
 
         for (int i = start; i < nums.length; i++) {
 //            if (used[i]) {
