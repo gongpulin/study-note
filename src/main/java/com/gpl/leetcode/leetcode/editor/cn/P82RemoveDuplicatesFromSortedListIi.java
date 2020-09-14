@@ -35,9 +35,43 @@ public class P82RemoveDuplicatesFromSortedListIi{
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode pre = dummy;
+        while (head != null && head.next != null) {
+            if (head.val == head.next.val) {
+                while (head.next != null && head.val == head.next.val) {  //head.next != null 这个条件不加会出现NullPointerException
+                    head = head.next;
+                }
+                head = head.next;
+                pre.next = head;
+            } else {
+                head = head.next;
+                pre = pre.next;
+            }
+
+        }
+        return dummy.next;
 
 
-        return head;
+
+//        Set<Integer> set = new HashSet<>();
+//        ListNode cur = head;
+//        while (cur != null) {
+//            set.add(cur.val);
+//            cur = cur.next;
+//        }
+//        ListNode dummy = new ListNode(-1);
+//        dummy.next = head;
+//        cur = dummy;
+//        while (cur != null && cur.next != null) {
+//            if (set.contains(cur.next.val)) {
+//                cur.next = cur.next.next;
+//            } else {
+//                cur = cur.next;
+//            }
+//        }
+//        return dummy.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
