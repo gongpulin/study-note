@@ -53,7 +53,28 @@ public class P26RemoveDuplicatesFromSortedArray{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int removeDuplicates(int[] nums) {
+
+        public int removeDuplicates(int[] nums) {
+            if (nums == null) {
+                return 0;
+            }
+            int left = 0, right = 1, len = nums.length;
+            while (right < len) {
+                if (nums[right] == nums[left]) {
+                    right++;
+                } else {
+                    nums[++left] = nums[right];
+                    right++;
+                }
+            }
+            return left+1;
+        }
+
+
+
+
+
+    public int removeDuplicates1(int[] nums) {
         if ( nums == null ) {
             return 0;
         }
