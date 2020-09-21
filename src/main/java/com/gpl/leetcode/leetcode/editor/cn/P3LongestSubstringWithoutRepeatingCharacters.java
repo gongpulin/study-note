@@ -47,7 +47,28 @@ public class P3LongestSubstringWithoutRepeatingCharacters{
      * 滑动窗口，s(i,j)为不重复子串，那么s(i+1,j)一定也为不重复子串，所以有指针不需要每次从头遍历
      */
     class Solution {
-    public int lengthOfLongestSubstring(String s) {
+
+        public int lengthOfLongestSubstring(String s) {
+            if (s == null) {
+                return 0;
+            }
+            Set<Character> set = new HashSet<>();
+            int right = 0, len = s.length();
+            int ans = 0;
+            for (int left = 0; left < len; left++) {
+                if (left != 0) {
+                    set.remove(s.charAt(left-1));
+                }
+                while (right < len && !set.contains(s.charAt(right))) {
+                    set.add(s.charAt(right));
+                    right++;
+                }
+                ans = Math.max(ans, right-left);
+            }
+            return ans;
+        }
+
+    public int lengthOfLongestSubstring2(String s) {
         int n = s.length();
         int rk = 0, res = 0;
         Set<Character> set = new HashSet<Character>();
