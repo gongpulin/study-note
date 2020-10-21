@@ -36,7 +36,6 @@ class Solution {
             if (prices == null || prices.length == 0) {
                 return 0;
             }
-            int ans = 0;
             int len = prices.length;
             int[][] dp = new int[len][2];
             for (int i = 0; i < len; i++) {
