@@ -34,7 +34,7 @@ public class SideOutputExample {
             System.out.println("Use --input to specify file input.");
             text = env.fromElements(new String[]{"aa","bb","cc","aa"});
         }
-        //，买也得买
+        //
         SingleOutputStreamOperator<Tuple2<String, Integer>> tokenized = text
                 .keyBy(new KeySelector<String, Integer>() {
                     private static final long serialVersionUID = 1L;

@@ -51,25 +51,6 @@ class Solution {
         return dp(coins, amount);
 
     }
-    private int dp1(int[] coins, int amount) {
-        int dpSzie = amount + 1;
-        int[] dp = new int[dpSzie];
-        Arrays.fill(dp,dpSzie);
-        dp[0] = 0;
-        for (int i = 0; i < dpSzie; i++) {
-            for (int coin : coins) {
-                if (i - coin < 0) {
-                    continue;
-                }
-                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
-            }
-        }
-        return dp[amount] == (amount+1) ? -1 : dp[amount];
-    }
-
-
-
-
 
     public int dp(int[] coins, int amount) {
         int dpSize = amount + 1;
@@ -86,7 +67,7 @@ class Solution {
         }
         return dp[amount] == dpSize ? -1 : dp[amount];
     }
-//    private int dp1(int[] coins, int amount, Map map) {
+//    private int dp(int[] coins, int amount, Map map) {
 //        if (map.containsKey(amount)) {
 //            return (int) map.get(amount);
 //        }
@@ -113,5 +94,5 @@ class Solution {
 
 }
 //leetcode submit region end(Prohibit modification and deletion)
-
+//
 }

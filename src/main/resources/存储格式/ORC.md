@@ -1,4 +1,5 @@
 # ORC
+https://juejin.im/post/6844904041600778247
 ORC全称是（Optimized Row Columnar）,ORC文件格式是一种Hadoop生态圈中的列式存储格式，它的产生早在2013年初，
 最初产生自Hive,用于降低Hadoop数据存储空间和加速Hive查询速度，和Parquet类似，它并不是一个单纯的列式存储格式，
 仍然是首相根据行组切割整个表，在每个行组内进行按列存储，ORC文件是自描述的，它的元数据使用Protocol Buffers序列化，

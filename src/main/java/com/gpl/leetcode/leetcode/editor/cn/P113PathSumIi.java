@@ -56,6 +56,7 @@ class Solution {
         DFS(root, ans, path, sum);
         return ans;
     }
+
     private void DFS(TreeNode node, List<List<Integer>> ans, List<Integer> path, int sum) {
         if (node == null) {
             return;

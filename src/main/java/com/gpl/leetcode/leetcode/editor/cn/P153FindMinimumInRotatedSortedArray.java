@@ -28,8 +28,21 @@ public class P153FindMinimumInRotatedSortedArray{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-
+        //旋转后两个还是有序的
         public int findMin(int[] nums) {
+            int left = 0, right = nums.length - 1;
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] > nums[right]) { //[3,4,5,6,7,1,2]
+                    left = mid + 1;
+                } else if (nums[mid] < nums[right]) {//[3,4,5,6,7,8,1,2]
+                    right = mid;
+                }
+            }
+            return nums[left];
+        }
+
+        public int findMin1(int[] nums) {
             if (nums.length == 1) {
                 return nums[0];
             }

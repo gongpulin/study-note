@@ -31,6 +31,7 @@ public class P188BestTimeToBuyAndSellStockIv{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+
     public int maxProfit(int k, int[] prices) {
         if (prices == null || prices.length == 0) {
             return 0;

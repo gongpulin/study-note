@@ -17,7 +17,7 @@ import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.co.BroadcastProcessFunction;
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumerBase;
 import org.apache.flink.util.Collector;
 
@@ -45,7 +45,7 @@ public class BroadcastOrderJoinGoodsName {
         prop.setProperty("group.id",group);
 
         FlinkKafkaConsumerBase<String> consumerBigOrder =
-                new FlinkKafkaConsumer010<>("order_topic_name",
+                new FlinkKafkaConsumer<>("order_topic_name",
                         new SimpleStringSchema(),
                         prop);
 
@@ -55,7 +55,7 @@ public class BroadcastOrderJoinGoodsName {
                 .map(str -> JSON.parseObject(str, Order.class));
 
         FlinkKafkaConsumerBase<String>  consumerSmallOrder =
-                new FlinkKafkaConsumer010<String>("goods_dim_topic_name",
+                new FlinkKafkaConsumer<String>("goods_dim_topic_name",
                         new SimpleStringSchema(),
                         prop);
 

@@ -25,7 +25,103 @@ public class P34FindFirstAndLastPositionOfElementInSortedArray{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int[] searchRange(int[] nums, int target) {
+        public int[] searchRange(int[] nums, int target) {
+            int[] ans = {-1, -1};
+            if (nums == null || nums.length == 0) {
+                return ans;
+            }
+            int leftBound = leftBound(nums, target);
+            if (leftBound == -1) {
+                return ans;
+            }
+            int rightBound = rightBound(nums, target);
+            ans[0] = leftBound;
+            ans[1] = rightBound;
+            return ans;
+        }
+
+        /**
+         * left取值范围 [0,nums.length]
+         * right取值范围[-1, nums.length - 1]
+         */
+        private int leftBound(int[] nums, int target) {
+            int left = 0, right = nums.length - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] == target) {
+                    right = mid - 1;
+                } else if (nums[mid] > target) {
+                    right = mid - 1;
+                } else if (nums[mid] < target) {
+                    left = mid + 1;
+                }
+            }
+            if (left == nums.length || nums[left] != target) {
+                return -1;
+            }
+            return left;
+        }
+        private int rightBound(int[] nums, int target) {
+            int left = 0, right = nums.length - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] == target) {
+                    left = mid + 1;
+                } else if (nums[mid] < target) {
+                    left = mid + 1;
+                } else if (nums[mid] > target) {
+                    right = mid - 1;
+                }
+            }
+            if (right < 0 || nums[left - 1] != target) {
+                return -1;
+            }
+            return left - 1;
+        }
+
+
+        private int leftBound1(int[] nums, int target) {
+            int left = 0, right = nums.length;
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] == target) {
+                    right = mid;
+                } else if (nums[mid] > target) {
+                    right = mid;
+                } else if (nums[mid] < target) {
+                    left = mid + 1;
+                }
+            }
+            if (left == nums.length || nums[left] != target) {
+                return -1;
+            }
+            return left;
+        }
+
+
+        private int rightBound1(int[] nums, int target) {
+            int left = 0, right = nums.length;
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] == target) {
+                    left = mid + 1;
+                } else if (nums[mid] < target) {
+                    left = mid + 1;
+                } else if (nums[mid] > target) {
+                    right = mid;
+                }
+            }
+            if (right < 0 || nums[left - 1] != target) { //注意这里结束条件是left == right是nums[right - 1] != target
+                return -1;
+            }
+            return left - 1;
+        }
+
+
+        /**
+         * 先求出一个target下标，然后左右线性遍历
+         */
+        public int[] searchRange1(int[] nums, int target) {
         int[] ans = {-1, -1};
         if(nums == null) {
             return ans;

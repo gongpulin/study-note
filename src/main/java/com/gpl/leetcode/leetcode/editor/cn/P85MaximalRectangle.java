@@ -22,8 +22,29 @@ public class P85MaximalRectangle{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+        /**
+         * dp[i][j] =
+         */
     public int maximalRectangle(char[][] matrix) {
-        return 0;
+        if (matrix == null || matrix.length == 0) {
+            return 0;
+        }
+        int m = matrix.length, n = matrix[0].length;
+        int[][] dp = new int[m][n];
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == '1') {
+                    dp[i][j] = j == 0 ? 1 : dp[i][j - 1] + 1;
+                    int width = dp[i][j];
+                    for (int k = i; k >= 0; k--) {
+                        width = Math.min(width, dp[k][j]);
+                        ans = Math.max(ans, width * (i - k + 1));
+                    }
+                }
+            }
+        }
+        return ans;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -37,6 +37,7 @@ public class P41FirstMissingPositive{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+
         /**
          * 对于一个长度为N的数组，没有出现的最小正整数只能在[1,N+1]中，
          */
