@@ -42,7 +42,7 @@
 // 
 // Related Topics 动态规划
 
-区域和检索 - 数组不可变
+
 package com.gpl.leetcode.leetcode.editor.cn;
 //Java：区域和检索 - 数组不可变
 public class P303RangeSumQueryImmutable{
