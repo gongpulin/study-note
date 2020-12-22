@@ -62,7 +62,7 @@
 package com.gpl.leetcode.leetcode.editor.cn;
 //Java：统计只差一个字符的子串数目
 public class P1638CountSubstringsThatDifferByOneCharacter{
-    public static void main(String[] args) {统计只差一个字符的子串数目
+    public static void main(String[] args) {
         Solution solution = new P1638CountSubstringsThatDifferByOneCharacter().new Solution();
         // TO TEST
     }
