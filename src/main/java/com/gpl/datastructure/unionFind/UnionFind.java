@@ -7,6 +7,7 @@ package com.gpl.datastructure.unionFind;
 
 /**
  * 数组实现并查集，元素内数字代表集合号
+ * https://labuladong.gitbook.io/algo/shu-ju-jie-gou-xi-lie/2.4-shou-ba-shou-she-ji-shu-ju-jie-gou/unionfind-suan-fa-xiang-jie
  */
 public class UnionFind {
     /**
