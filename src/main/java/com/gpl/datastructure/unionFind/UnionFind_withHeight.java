@@ -21,6 +21,7 @@ public class UnionFind_withHeight {
 
     public int find(int element) {
         while (element != parent[element]) {
+            parent[element] = parent[parent[element]];
             element = parent[element];
         }
         return element;
