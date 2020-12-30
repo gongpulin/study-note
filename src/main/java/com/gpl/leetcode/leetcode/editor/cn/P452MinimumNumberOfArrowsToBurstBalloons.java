@@ -33,7 +33,35 @@ public class P452MinimumNumberOfArrowsToBurstBalloons{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int findMinArrowShots(int[][] points) {
+        public int findMinArrowShots(int[][] points) {
+            if (points == null || points.length == 0) {
+                return 0;
+            }
+//            Arrays.sort(points, (v1, v2) -> v1[1] - v2[1]);
+            Arrays.sort(points, new Comparator<int[]> () {
+                @Override
+                public int compare(int[] o1, int[] o2) {
+                    long res = (long)o1[1] - (long)o2[1];
+                    if (res < 0) {
+                        return -1;
+                    } else if (res == 0) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            });
+            int end = points[0][1];
+            int ans = 1;
+            for (int[] point : points) {
+                if (point[0] > end) {
+                    ans++;
+                    end = point[1];
+                }
+            }
+            return ans;
+        }
+    public int findMinArrowShots1(int[][] points) {
         if (points == null || points.length == 0) {
             return 0;
         }
