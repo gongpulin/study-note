@@ -68,6 +68,10 @@ public class P1638CountSubstringsThatDifferByOneCharacter{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+        /**
+         * dp[i][j][0]表示s的前i个字符和t的前j个字符只差一个字符的字串数
+         * dp[i][j][1]表示s的前i个字符和t的前j个字符相同的字串数
+         */
     public int countSubstrings(String s, String t) {
         if (s == null || t == null) {
             return 0;
