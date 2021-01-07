@@ -41,8 +41,40 @@ public class P94BinaryTreeInorderTraversal{
 class Solution {
 
 
+    public List<Integer> inorderTraversal8(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                cur = stack.pop();
+                ans.add(cur.val);
+                cur = cur.right;
+            }
+        }
+        return ans;
+    }
+
     public List<Integer> inorderTraversal(TreeNode root) {
-//        ArrayDeque<TreeNode> deqP = new ArrayDeque<TreeNode>();
+        List<Integer> ans = new ArrayList();
+        dfs(root, ans);
+        return ans;
+    }
+    private void dfs(TreeNode node, List<Integer> ans) {
+        if (node == null) {
+            return;
+        }
+        dfs(node.left, ans);
+        ans.add(node.val);
+        dfs(node.right, ans);
+    }
+
+
+
+    public List<Integer> inorderTraversal1(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
         TreeNode cur = root;
