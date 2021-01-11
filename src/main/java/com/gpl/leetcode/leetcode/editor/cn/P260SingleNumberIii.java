@@ -27,6 +27,8 @@ public class P260SingleNumberIii{
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+
+        //https://mp.weixin.qq.com/s/WOmDQcgq9IwL43WP11KItg
     public int[] singleNumber1(int[] nums) {
         Map<Integer, Integer> countMap = new HashMap<>();
         for (int num : nums) {
