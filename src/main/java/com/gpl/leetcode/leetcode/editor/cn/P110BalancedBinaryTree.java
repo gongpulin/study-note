@@ -76,9 +76,9 @@ class Solution {
         if ( node == null ) {
             return 0;
         }
-        if ( node.left == null && node.right == null ) {
-            return 1;
-        }
+//        if ( node.left == null && node.right == null ) {
+//            return 1;
+//        }
         int leftMaxDepth = maxDepth(node.left);
         int rightMaxDepth = maxDepth(node.right);
         if (leftMaxDepth == -1 || rightMaxDepth == -1 || Math.abs(leftMaxDepth-rightMaxDepth) > 1) {
