@@ -54,7 +54,7 @@ class Solution {
 //        ans.add(root.val);
 //    }
 
-    public List<Integer> postorderTraversal2(TreeNode root) {
+    public List<Integer> postorderTraversal(TreeNode root) {
         LinkedList<Integer> ans = new LinkedList<>();
         if (root == null) {
             return ans;
