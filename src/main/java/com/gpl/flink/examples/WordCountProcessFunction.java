@@ -24,7 +24,7 @@ import java.util.Random;
 
 /**
  * https://zhuanlan.zhihu.com/p/130708277
- *
+ *【示例】维护数据流中每个key的计数，并在每过一分钟(以事件时间)而未更新该key时，发出一个key/count对。 sessionwindow
  */
 public class WordCountProcessFunction {
     public static void main(String[] args) throws Exception {
@@ -50,13 +50,13 @@ public class WordCountProcessFunction {
                     public long extractAscendingTimestamp(Tuple2<String, Long> element) {
                         return System.currentTimeMillis();
                     }
-                }).keyBy(0)
+                }).keyBy(x -> x.f0)
                 .process(new CountWithTimeoutFunction());
         stream.print().setParallelism(1);
         env.execute("WordCountProcessFunction");
     }
 
-    private static final class CountWithTimeoutFunction extends KeyedProcessFunction<Tuple, Tuple2<String, Long>, Tuple2<String, Long>> {
+    private static final class CountWithTimeoutFunction extends KeyedProcessFunction<String, Tuple2<String, Long>, Tuple2<String, Long>> {
         private ValueState<CountWithTimestamp> state;
 
         @Override
@@ -84,12 +84,10 @@ public class WordCountProcessFunction {
         @Override
         public void onTimer(long timestamp, OnTimerContext ctx, Collector<Tuple2<String, Long>> out) throws IOException {
             CountWithTimestamp result = state.value();
-
-            out.collect(new Tuple2(result.key, result.count));
-//            if (timestamp == result.lastModified + 1) {
-//                System.out.println("key:"+result.key+",count:"+result.count);
-//                out.collect(new Tuple2(result.key, result.count));
-//            }
+            if (timestamp == result.lastModified + 60000) {
+                System.out.println("key:"+result.key+",count:"+result.count);
+                out.collect(new Tuple2(result.key, result.count));
+            }
         }
     }
 
