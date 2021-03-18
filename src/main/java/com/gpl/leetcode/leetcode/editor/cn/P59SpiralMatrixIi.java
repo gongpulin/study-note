@@ -24,6 +24,7 @@ class Solution {
     public int[][] generateMatrix(int n) {
         int[][] ans = new int[n][n];
         int[][] direction = {{0,1},{1,0},{0,-1},{-1,0}};
+
         int row = 0, col = 0, dIndex = 0;
         for (int i = 1; i <= n * n; i++) {
             ans[row][col] = i;
